@@ -3,5 +3,5 @@
   "name": "Ichigo Mod",
   "version": "@PROJECT_VERSION@",
   "author": "BeZide",
-  "description": "An example Dusklight mod"
+  "description": "A mod for dusklight that replaces link with ichigo from Bleach."
 }
