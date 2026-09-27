@@ -1,7 +1,7 @@
 {
-  "id": "com.example.my_mod",
-  "name": "My Mod",
+  "id": "dev.bezide.ichigo_mod",
+  "name": "Ichigo Mod",
   "version": "@PROJECT_VERSION@",
-  "author": "You",
+  "author": "BeZide",
   "description": "An example Dusklight mod"
 }
