@@ -42,4 +42,11 @@ if(ICHIGO_BUILD_TESTS)
     target_compile_features(update_service_test PRIVATE cxx_std_20)
     target_link_libraries(update_service_test PRIVATE dusklight_mod_api nlohmann_json::nlohmann_json)
     add_test(NAME update_service COMMAND update_service_test)
+    if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+        # Linux permits unresolved symbols in modules; service pointer definitions
+        # must still be supplied by IMPORT_SERVICE rather than the game binary.
+        add_test(NAME service_imports COMMAND ${CMAKE_COMMAND}
+            "-DMOD_FILE=$<TARGET_FILE:ichigo_mod>" "-DNM=${CMAKE_NM}"
+            -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/check_service_imports.cmake")
+    endif()
 endif()

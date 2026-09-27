@@ -12,6 +12,7 @@
 DEFINE_MOD();
 
 IMPORT_SERVICE(LogService, svc_log);
+IMPORT_SERVICE(HostService, svc_host);
 IMPORT_SERVICE(HookService, svc_hook);
 IMPORT_SERVICE(ConfigService, svc_config);
 IMPORT_SERVICE(UiService, svc_ui);
