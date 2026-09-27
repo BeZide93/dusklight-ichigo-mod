@@ -2,6 +2,7 @@
 #undef NDEBUG
 #endif
 #include <cassert>
+#include <cctype>
 #include <iostream>
 #include "../src/update_service.cpp"
 
@@ -119,6 +120,16 @@ int main() {
         *out = 1; return MOD_OK;
     };
     http.request = +[](ModContext*, const HttpRequestDesc* desc, HttpCompleteFn fn, void*, HttpRequestHandle* out) {
+        // Dusklight owns these transport headers and rejects caller overrides.
+        // Apply its constraint to both the release request and the download.
+        for (std::uint32_t i = 0; i < desc->header_count; ++i) {
+            std::string name = desc->headers[i].name;
+            for (char& c : name) c = static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
+            for (const char* reserved : {"user-agent", "host", "content-length", "connection",
+                                         "accept-encoding", "range", "if-range"}) {
+                if (name == reserved) return MOD_INVALID_ARGUMENT;
+            }
+        }
         ++requests; requestUrl = desc->url; requestPath = desc->download_path ? desc->download_path : "";
         complete = fn; lastRequest = *out = ++nextRequest; return MOD_OK;
     };

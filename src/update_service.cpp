@@ -7,6 +7,7 @@
 #include <chrono>
 #include <filesystem>
 #include <fstream>
+#include <iterator>
 #include <utility>
 
 namespace ichigo {
@@ -45,14 +46,14 @@ void cancel_pending() {
 }
 
 HttpRequestDesc request_desc(const char* url) {
+    // HttpService supplies User-Agent itself and rejects overrides of it.
     static const HttpHeader headers[] = {
-        {"User-Agent", "IchigoModUpdater"},
         {"Accept", "application/vnd.github+json"},
     };
     HttpRequestDesc desc = HTTP_REQUEST_DESC_INIT;
     desc.url = url;
     desc.headers = headers;
-    desc.header_count = 2;
+    desc.header_count = static_cast<std::uint32_t>(std::size(headers));
     desc.connect_timeout_ms = 10000;
     desc.idle_timeout_ms = 15000;
     desc.total_timeout_ms = 30000;
@@ -66,7 +67,10 @@ void checked(ModContext*, HttpRequestHandle request, const HttpResult* result, v
     if (!result || result->error != HTTP_ERROR_NONE ||
         (result->status_code != 200 && result->status_code != 404)) {
         // Background checks do not interrupt play with an error dialog.
-        svc_log->error(mod_ctx, "[Updater] Could not check Ichigo Mod releases.");
+        const std::string detail = "[Updater] Could not check Ichigo Mod releases: HTTP " +
+            std::to_string(result ? result->status_code : 0) + ", transport error " +
+            std::to_string(result ? static_cast<int>(result->error) : -1);
+        svc_log->error(mod_ctx, detail.c_str());
         if (s_manual) fail("Could not check for updates. Please try again later.");
         return;
     }
@@ -97,10 +101,13 @@ void start_check(bool manual) {
     s_state = State::Checking;
     auto desc = request_desc(kReleaseApi);
     desc.max_body_bytes = 2 * 1024 * 1024;
-    if (svc_http->request(mod_ctx, &desc, checked, nullptr, &s_request) != MOD_OK) {
+    const auto result = svc_http->request(mod_ctx, &desc, checked, nullptr, &s_request);
+    if (result != MOD_OK) {
         s_request = 0;
         s_state = State::Idle;
-        svc_log->error(mod_ctx, "[Updater] Could not start release check.");
+        const std::string detail = "[Updater] Could not start release check: ModResult=" +
+            std::to_string(static_cast<int>(result));
+        svc_log->error(mod_ctx, detail.c_str());
         if (manual) fail("Could not start the update check. Please try again later.");
     }
 }
@@ -169,8 +176,12 @@ void confirm_download(ModContext*, UiDialogHandle, void*) {
     desc.download_path = downloadPath.c_str();
     desc.total_timeout_ms = 300000;
     s_state = State::Downloading;
-    if (svc_http->request(mod_ctx, &desc, downloaded, nullptr, &s_request) != MOD_OK) {
+    const auto result = svc_http->request(mod_ctx, &desc, downloaded, nullptr, &s_request);
+    if (result != MOD_OK) {
         s_request = 0;
+        const std::string detail = "[Updater] Could not start download: ModResult=" +
+            std::to_string(static_cast<int>(result));
+        svc_log->error(mod_ctx, detail.c_str());
         fail("Could not start the download. Please try again later.");
     }
 }
