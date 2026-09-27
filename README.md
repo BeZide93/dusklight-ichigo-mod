@@ -5,6 +5,21 @@ A standalone template for [Dusklight](https://github.com/TwilitRealm/dusklight) 
 See the [Dusklight modding documentation](https://github.com/TwilitRealm/dusklight/blob/main/docs/modding.md)
 for the full mod API: services, hooking game functions, asset overlays, and more.
 
+## Optional update checker
+
+Open **Mods → Ichigo Mod → Check for Updates** to enable release checks. It is
+off by default and saved independently of Dawnlight. When enabled, it checks once
+on mod load and immediately when switched on; **Check Now** repeats the check.
+
+The checker uses this repository's latest stable GitHub release, not Actions
+artifacts. A newer `vMAJOR.MINOR.PATCH` release must include the combined
+`ichigo_mod.dusk` asset. Choosing **Update** downloads it and replaces the installed
+`ichigo_mod.dusk`; **Later** leaves the installed version untouched. Restart
+Dusklight after installation. Renamed packages must be updated manually.
+
+Downloads use Dusklight's HTTP service on all platforms. Turning the option off
+cancels pending requests. Failed or incomplete downloads do not replace the mod.
+
 ## Quick start
 
 1. Click "Use this template" to create a new repository for your mod.
