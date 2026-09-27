@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <asset>
+    <contributor>
+      <author>Blender User</author>
+      <authoring_tool>Blender 4.1.0 commit date:2024-03-25, commit time:20:42, hash:40a5e739e270</authoring_tool>
+    </contributor>
+    <created>2026-09-01T10:19:13</created>
+    <modified>2026-09-01T10:19:13</modified>
+    <unit name="meter" meter="1"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_effects>
+    <effect id="m0al_podM_m-effect">
+      <profile_COMMON>
+        <newparam sid="al_podM_png-surface">
+          <surface type="2D">
+            <init_from>al_podM_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="al_podM_png-sampler">
+          <sampler2D>
+            <source>al_podM_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <texture texture="al_podM_png-sampler" texcoord="meshId0-tex0"/>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.5</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_images>
+    <image id="al_podM_png" name="al_podM_png">
+      <init_from>al_podM.png</init_from>
+    </image>
+  </library_images>
+  <library_materials>
+    <material id="m0al_podM_m-material" name="m0al_podM_m">
+      <instance_effect url="#m0al_podM_m-effect"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="meshId0_name-mesh" name="meshId0_name">
+      <mesh>
+        <source id="meshId0_name-mesh-positions">
+          <float_array id="meshId0_name-mesh-positions-array" count="9">-0.05846047 0.1015682 -1.969549 0.1556478 0.0288285 -1.339259 -0.07496774 -0.133125 -0.9725271</float_array>
+          <technique_common>
+            <accessor source="#meshId0_name-mesh-positions-array" count="3" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="meshId0_name-mesh-normals">
+          <float_array id="meshId0_name-mesh-normals-array" count="9">0.5445902 -0.8381704 0.02986931 0.3338679 -0.92311 -0.1907888 0.3723598 -0.8820124 -0.2887951</float_array>
+          <technique_common>
+            <accessor source="#meshId0_name-mesh-normals-array" count="3" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="meshId0_name-mesh-map-0">
+          <float_array id="meshId0_name-mesh-map-0-array" count="6">2.87329 0.859253 2.995 0.872681 2.94495 0.683838</float_array>
+          <technique_common>
+            <accessor source="#meshId0_name-mesh-map-0-array" count="3" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="meshId0_name-mesh-vertices">
+          <input semantic="POSITION" source="#meshId0_name-mesh-positions"/>
+        </vertices>
+        <triangles material="m0al_podM_m-material" count="1">
+          <input semantic="VERTEX" source="#meshId0_name-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#meshId0_name-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#meshId0_name-mesh-map-0" offset="2" set="0"/>
+          <p>1 0 0 2 1 1 0 2 2</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_controllers>
+    <controller id="skeleton_root_mesh-0-skin" name="skeleton_root">
+      <skin source="#meshId0_name-mesh">
+        <bind_shape_matrix>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</bind_shape_matrix>
+        <source id="skeleton_root_mesh-0-skin-joints">
+          <Name_array id="skeleton_root_mesh-0-skin-joints-array" count="1">al_podM</Name_array>
+          <technique_common>
+            <accessor source="#skeleton_root_mesh-0-skin-joints-array" count="1" stride="1">
+              <param name="JOINT" type="name"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="skeleton_root_mesh-0-skin-bind_poses">
+          <float_array id="skeleton_root_mesh-0-skin-bind_poses-array" count="16">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float_array>
+          <technique_common>
+            <accessor source="#skeleton_root_mesh-0-skin-bind_poses-array" count="1" stride="16">
+              <param name="TRANSFORM" type="float4x4"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="skeleton_root_mesh-0-skin-weights">
+          <float_array id="skeleton_root_mesh-0-skin-weights-array" count="3">1 1 1</float_array>
+          <technique_common>
+            <accessor source="#skeleton_root_mesh-0-skin-weights-array" count="3" stride="1">
+              <param name="WEIGHT" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <joints>
+          <input semantic="JOINT" source="#skeleton_root_mesh-0-skin-joints"/>
+          <input semantic="INV_BIND_MATRIX" source="#skeleton_root_mesh-0-skin-bind_poses"/>
+        </joints>
+        <vertex_weights count="3">
+          <input semantic="JOINT" source="#skeleton_root_mesh-0-skin-joints" offset="0"/>
+          <input semantic="WEIGHT" source="#skeleton_root_mesh-0-skin-weights" offset="1"/>
+          <vcount>1 1 1 </vcount>
+          <v>0 0 0 1 0 2</v>
+        </vertex_weights>
+      </skin>
+    </controller>
+  </library_controllers>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="skeleton_root" name="skeleton_root" type="NODE">
+        <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+        <node id="skeleton_root_al_podM" name="al_podM" sid="al_podM" type="JOINT">
+          <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+          <extra>
+            <technique profile="blender">
+              <tip_x sid="tip_x" type="float">0</tip_x>
+              <tip_y sid="tip_y" type="float">0</tip_y>
+              <tip_z sid="tip_z" type="float">1</tip_z>
+            </technique>
+          </extra>
+        </node>
+        <node id="mesh-0" name="mesh-0" type="NODE">
+          <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+          <instance_controller url="#skeleton_root_mesh-0-skin">
+            <skeleton>#skeleton_root_al_podM</skeleton>
+            <bind_material>
+              <technique_common>
+                <instance_material symbol="m0al_podM_m-material" target="#m0al_podM_m-material">
+                  <bind_vertex_input semantic="meshId0-tex0" input_semantic="TEXCOORD" input_set="0"/>
+                </instance_material>
+              </technique_common>
+            </bind_material>
+          </instance_controller>
+        </node>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>
