@@ -20,6 +20,28 @@ Dusklight after installation. Renamed packages must be updated manually.
 Downloads use Dusklight's HTTP service on all platforms. Turning the option off
 cancels pending requests. Failed or incomplete downloads do not replace the mod.
 
+## Model settings
+
+Open **Mods → Ichigo Mod → Model Overlays** to toggle each of the 20 BMD
+replacements independently. All switches default to **On**. Files are grouped by
+archive: **Alink** (swords and scabbards), **Bmdl**, **Kmdl**, **Mmdl**, and **Zmdl**
+(their separate body, face, head and hand models). Identical filenames in different
+archives have separate settings, saved in `config.json`.
+
+**Restart Dusklight after changing models.** Overlays change when files are read;
+models already cached in memory are not replaced live. Off removes only Ichigo's
+replacement, allowing the original game asset or another mod's replacement to
+load. Model combinations can have visible seams or mismatched parts.
+
+For the normal Kmdl appearance, `al.bmd`, `al_face.bmd`, `al_head.bmd`, and
+`al_hands.bmd` can each be disabled separately. This also affects other actors
+that load those same resources, including Dark Link.
+
+The BMD files are bundled under `res/models/` and registered through Dusklight's
+runtime overlay service. They must not also be packaged under `overlay/`, which
+would keep disabled replacements active. `src/model_overlays.inc` lists every
+file and its stable setting key; the model settings test checks asset coverage.
+
 ## Quick start
 
 1. Click "Use this template" to create a new repository for your mod.
