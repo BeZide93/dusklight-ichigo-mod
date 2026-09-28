@@ -108,14 +108,27 @@ int main(int argc, char** argv) {
     }
     assert(assets == registered && assets.size() == 20);
     assert(init_model_settings() == MOD_OK && active.size() == assets.size());
+    for (const char* group : {"Kmdl", "Bmdl", "Mmdl", "Zmdl"}) {
+        assert(face_overlay_enabled(group));
+    }
+    assert(!face_overlay_enabled("Wmdl") && !face_overlay_enabled(nullptr));
     assert(build_model_settings(mod_ctx, 1) == MOD_OK && controls.size() == assets.size());
     for (auto& model : s_models) {
         const auto old = active;
         toggle(model.config, false);
         assert(!model.overlay && active.size() + 1 == old.size());
+        if (std::string(model.label).find("face.bmd") != std::string::npos) {
+            assert(!face_overlay_enabled(model.group));
+            for (const char* group : {"Kmdl", "Bmdl", "Mmdl", "Zmdl"}) {
+                if (std::string(group) != model.group) assert(face_overlay_enabled(group));
+            }
+        }
         for (const auto& [id, path] : active) assert(old.at(id) == path);
         toggle(model.config, true);
         assert(model.overlay && active.size() == assets.size());
+        for (const char* group : {"Kmdl", "Bmdl", "Mmdl", "Zmdl"}) {
+            assert(face_overlay_enabled(group));
+        }
         toggle(model.config, true); // Idempotent; no duplicated overlay.
     }
     auto& first = s_models[0];

@@ -52,6 +52,18 @@ void changed(ModContext*, ConfigVarHandle, const ConfigVarValue* value,
 }
 }
 
+bool face_overlay_enabled(const char* group) {
+    if (!group) return false;
+    for (const auto& model : s_models) {
+        if (std::strcmp(model.group, group) == 0 &&
+            (std::strcmp(model.label, "al_face.bmd") == 0 ||
+             std::strcmp(model.label, "zl_face.bmd") == 0)) {
+            return model.overlay != 0;
+        }
+    }
+    return false;
+}
+
 ModResult init_model_settings() {
     for (auto& model : s_models) {
         ConfigVarDesc desc = CONFIG_VAR_DESC_INIT;

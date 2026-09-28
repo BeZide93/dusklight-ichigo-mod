@@ -5,6 +5,7 @@
 #include "service_imports.hpp"
 #include "update_service.hpp"
 #include "model_settings.hpp"
+#include "eye_movement.hpp"
 
 // Game includes
 #include "d/d_item_data.h"
@@ -32,7 +33,7 @@ static HookAction on_create_item_pre(ModContext*, void* args, void*, void*) {
 }
 
 extern "C" {
-MOD_EXPORT ModResult mod_initialize(ModError*) {
+MOD_EXPORT ModResult mod_initialize(ModError* error) {
     // Installs a pre hook on fopAcM_createItem.
     ModResult result = mods::hook::add_pre<CreateItem>(on_create_item_pre);
     if (result != MOD_OK) {
@@ -43,6 +44,11 @@ MOD_EXPORT ModResult mod_initialize(ModError*) {
     svc_log->info(mod_ctx, "Ichigo Mod initialized");
     result = ichigo::init_model_settings();
     if (result != MOD_OK) return result;
+    result = ichigo::install_eye_movement_hooks(error);
+    if (result != MOD_OK) {
+        ichigo::shutdown_model_settings();
+        return result;
+    }
     result = ichigo::init_update_service();
     if (result != MOD_OK) ichigo::shutdown_model_settings();
     return result;

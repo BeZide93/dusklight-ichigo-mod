@@ -27,7 +27,7 @@ FetchContent_MakeAvailable(ichigo_json)
 
 add_mod(ichigo_mod
         FEATURES game          # remove for service/asset-only mods; add webgpu for GfxService
-        SOURCES src/mod.cpp src/update_service.cpp src/model_settings.cpp
+        SOURCES src/mod.cpp src/update_service.cpp src/model_settings.cpp src/eye_movement.cpp
         MOD_JSON "${CMAKE_CURRENT_BINARY_DIR}/mod.json"
         RES_DIR res            # mod resources, including icon.png and banner.png
         TEXTURES_DIR textures  # texture replacements; remove if unused
