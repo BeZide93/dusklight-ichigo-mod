@@ -107,3 +107,19 @@ reduced geometry, including the fine-surface fix. Depending on the variant, this
 removes **30–64% of strip triangles** and **25–69% of submitted vertex records**.
 Fine hair patches, textures, rig data and each model's individual toggle are preserved.
 See [hair model details and reproduction](docs/hair-model.md).
+
+## Eye movement
+
+Both eyes use a fixed **40% movement range** for all four Ichigo variants:
+Kmdl (Hero), Bmdl (casual), Mmdl (Magic Armor) and Zmdl (Zora).
+The code uses Dawnlight's final eye-material calculation hook, covering both
+BTK animations and procedural idle/target glances without editing AlAnm files.
+Texture scale, rotation, eyelid animation, animation timing and internal eye
+interpolation remain unchanged. Wolf Link and status-window previews are excluded.
+Disabling a variant's face overlay also disables this adjustment for that variant;
+as with other model settings, restart Dusklight after changing overlays.
+
+When Dawnlight is also enabled, Ichigo's fixed 40% replaces its eye-range setting
+for these faces rather than multiplying the two percentages. Use the original
+AlAnm/BTK files: previously reduced animation files would still reduce the input
+before the runtime adjustment.
