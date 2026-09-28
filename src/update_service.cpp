@@ -1,6 +1,7 @@
 // Dawnlight's optional release-check / confirm / download / restart flow,
 // adapted to the Ichigo package and Dusklight's managed asynchronous HTTP API.
 #include "update_service.hpp"
+#include "model_settings.hpp"
 #include "service_imports.hpp"
 #include "update_release.hpp"
 
@@ -218,7 +219,9 @@ ModResult build_panel(ModContext* ctx, UiElementHandle pane, void*, ModError*) {
     button.label = "Check Now";
     button.on_pressed = check_now;
     button.is_disabled = check_disabled;
-    return svc_ui->pane_add_control(ctx, pane, &button, nullptr);
+    result = svc_ui->pane_add_control(ctx, pane, &button, nullptr);
+    if (result != MOD_OK) return result;
+    return build_model_settings(ctx, pane);
 }
 }
 
