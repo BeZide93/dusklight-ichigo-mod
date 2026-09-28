@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Simplify this mod's al_head.bmd display lists without rewriting its rig or materials.
+"""Simplify this mod's head BMD display lists without rewriting its rig or materials.
 
 Requires numpy and a shared meshoptimizer library; see docs/hair-model.md.
 Only existing vertex records are selected. UVs, normals, bone indices and all
 non-SHP1 sections remain byte-identical. Packet borders, small surface patches and skinning transitions
-are protected. The small first shape is kept intact.
+are protected. Shapes other than the selected hair shape are kept intact.
 """
 import argparse
 import ctypes as C
@@ -37,7 +37,7 @@ class Model:
         self.blocks = {b[:4]: b for b in self.sections}
         self.shp = self.blocks[b'SHP1']
         s = self.shp
-        assert u16(s, 8) == 2
+        assert 1 <= u16(s, 8) <= 3
         self.packets = []
         self.formats = {}
         vtx = self.blocks[b'VTX1']
@@ -47,7 +47,7 @@ class Model:
             self.formats[attr] = count, typ, vtx[offset + 12]
             offset += 16
         init, remap, desc, self.matrix, self.dl, self.minit, self.dinit = [u32(s, x) for x in (12, 16, 24, 28, 32, 36, 40)]
-        for shape in range(2):
+        for shape in range(u16(s, 8)):
             entry = init + u16(s, remap + 2 * shape) * 40
             groups, vi, mi, di = struct.unpack_from('>4H', s, entry + 2)
             assert s[entry] == 3
@@ -134,7 +134,8 @@ def protected_faces(packet, bones):
                      for t, valid in zip(triangles, real)])
 
 
-def simplify(model, library, ratio=0.3, error=0.005):
+def simplify(model, library, ratio=0.3, error=0.005, hair_shape=1):
+    assert hair_shape in {p['shape'] for p in model.packets}
     lib = C.CDLL(str(library))
     f = lib.meshopt_simplifyWithAttributes
     f.restype = C.c_size_t
@@ -143,7 +144,7 @@ def simplify(model, library, ratio=0.3, error=0.005):
     lib.meshopt_stripify.argtypes = [C.c_void_p,C.c_void_p,C.c_size_t,C.c_size_t,C.c_uint]; lib.meshopt_stripify.restype = C.c_size_t
     report = []; outputs = []
     for p in model.packets:
-        if p['shape'] == 0:
+        if p['shape'] != hair_shape:
             outputs.append(p['raw']); continue
         pos, attr, bones = model.decode(p)
         triangles = p['triangles']
@@ -235,7 +236,7 @@ def simplify(model, library, ratio=0.3, error=0.005):
     return bytes(result), report
 
 
-def validate(original, output):
+def validate(original, output, hair_shape=1):
     before, after = Model(original), Model(output)
     for tag in before.blocks:
         if tag != b'SHP1': assert before.blocks[tag] == after.blocks[tag], tag
@@ -243,7 +244,7 @@ def validate(original, output):
     for old, new in zip(before.packets, after.packets):
         assert old['attrs'] == new['attrs'] and old['palette'] == new['palette']
         assert set(new['records']) <= set(old['records'])
-        if old['shape'] == 0: assert old['raw'] == new['raw']
+        if old['shape'] != hair_shape: assert old['raw'] == new['raw']
         _, _, bones = before.decode(old)
         after.decode(new)  # Validate every retained attribute/palette reference.
         new_triangles = Counter(oriented([new['records'][i] for i in t])
@@ -259,13 +260,14 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('input', type=Path); parser.add_argument('output', type=Path)
     parser.add_argument('--library', required=True, type=Path)
+    parser.add_argument('--hair-shape', type=int, default=1)
     parser.add_argument('--ratio', type=float, default=0.3)
     parser.add_argument('--error', type=float, default=0.005)
     args = parser.parse_args()
     assert 0 < args.ratio <= 1 and 0 < args.error <= 0.01
     original = args.input.read_bytes()
-    result, report = simplify(Model(original), args.library, args.ratio, args.error)
-    before, after = validate(original, result)
+    result, report = simplify(Model(original), args.library, args.ratio, args.error, args.hair_shape)
+    before, after = validate(original, result, args.hair_shape)
     print(json.dumps(dict(packets=report, triangles_before=sum(len(p['triangles']) for p in before.packets),
         triangles_after=sum(len(p['triangles']) for p in after.packets), bytes_before=len(original), bytes_after=len(result)), indent=2))
     args.output.write_bytes(result)
