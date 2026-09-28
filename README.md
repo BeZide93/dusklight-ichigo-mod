@@ -77,3 +77,9 @@ Point the build at an existing checkout instead of fetching one:
 ```sh
 cmake -B build -DDUSKLIGHT_DIR=~/path/to/dusklight
 ```
+
+## Optimized hair model
+
+The normal Ichigo hair model uses about **39% fewer strip triangles** and
+**37% fewer submitted vertex records**. Textures and rig data are preserved.
+See [hair model details and reproduction](docs/hair-model.md).
