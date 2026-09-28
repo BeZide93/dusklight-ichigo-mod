@@ -1,6 +1,6 @@
 {
-  "file_sha256": "f0b522f96fd72692867bef779ff53aeb042713b346417f037091283e038d4655",
-  "triangles": 23639,
+  "file_sha256": "4a75d87b04c809e3823fecd22c170de2485fd3d251b4267a6fde3cfff42aee3d",
+  "triangles": 27169,
   "packets": 7,
   "shapes": 2,
   "unchanged_sections": {
@@ -11,5 +11,54 @@
     "JNT1": "92897490c8d4b00483b2cf8e3a619b91228357c52cf8cd2f0b94360c120c6c41",
     "MAT3": "a12976a920a922ca589e5db336378fea08ba91e91be8bc8fa1a8def10366fc91",
     "TEX1": "7868c27cb0ff139d5b791adb4a6c8d7da1b64b17c1635458fbfd3239f1ff517e"
+  },
+  "skinning_transitions": [
+    {
+      "triangles": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "triangles": 1006,
+      "sha256": "8b711f2422fd56dedf2ea2d5410a7361e393b99adaca4770d4b055b0ebef541b"
+    },
+    {
+      "triangles": 441,
+      "sha256": "3b4b852c4fdef6ab4323a380cd1e556b185e9d6c81e2a04b6580d576c3660636"
+    },
+    {
+      "triangles": 772,
+      "sha256": "16d0d2a94d71c78e7f510a0bb0a4c7b992df74e25cb7ee06d47b64da4a1cea0d"
+    },
+    {
+      "triangles": 89,
+      "sha256": "d31caf775fd8baf985990ca599a5b47ac2b1451f660e4b92b961d8b1bc7a76ec"
+    },
+    {
+      "triangles": 163,
+      "sha256": "9b36936e48aee4d905c4797a0d09cc3e325d795754666af07ebf6039a3323c7e"
+    },
+    {
+      "triangles": 77,
+      "sha256": "9a8b8d7d94488d8e155161014a623b74b41d7283461046e1265264b78b12f3d1"
+    }
+  ],
+  "vertices": 37589,
+  "unchanged_topology": {
+    "0": {
+      "triangles": 38,
+      "sha256": "8517a1e20e670f8a1ee4083b8c792240f69e4c435f1de39d23507abaeacd16dd"
+    },
+    "4": {
+      "triangles": 1015,
+      "sha256": "29ba298d9f51880344e2045274667273e418d5f45480daa9f05531b228f4f14d"
+    },
+    "5": {
+      "triangles": 2470,
+      "sha256": "6c861c040038a1c8de98e762b409703556b5c946858ccbe0db79c73c899356f1"
+    },
+    "6": {
+      "triangles": 861,
+      "sha256": "9d09644a9bce1d1f66b468eaf2e8d8e31e4ff07230c6c2d4c2bfdbbf0a269165"
+    }
   }
 }

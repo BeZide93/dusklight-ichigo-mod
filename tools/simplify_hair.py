@@ -3,8 +3,8 @@
 
 Requires numpy and a shared meshoptimizer library; see docs/hair-model.md.
 Only existing vertex records are selected. UVs, normals, bone indices and all
-non-SHP1 sections remain byte-identical. Packet borders and skinning transitions
-are locked. The small first shape is kept intact.
+non-SHP1 sections remain byte-identical. Packet borders, small surface patches and skinning transitions
+are protected. The small first shape is kept intact.
 """
 import argparse
 import ctypes as C
@@ -111,6 +111,29 @@ class Model:
         return np.array(positions, dtype=np.float32), np.array(attributes, dtype=np.float32), np.array(bones)
 
 
+def protected_faces(packet, bones):
+    """Retain small disconnected surface patches and all matrix transitions.
+
+    Connectivity uses complete records, so normal/UV seams are respected. Tiny
+    patches must not be welded away when the simplifier merges positions.
+    Repeated-record strip connectors have no area under any animation.
+    """
+    triangles = packet['triangles']
+    parent = list(range(len(packet['records'])))
+    def root(i):
+        while parent[i] != i:
+            parent[i] = parent[parent[i]]
+            i = parent[i]
+        return i
+    real = np.array([len(set(t)) == 3 for t in triangles])
+    for a, b, c in triangles[real]:
+        parent[root(b)] = root(a)
+        parent[root(c)] = root(a)
+    sizes = Counter(root(t[0]) for t in triangles[real])
+    return np.array([bool(valid and (sizes[root(t[0])] <= 32 or len(set(bones[t])) > 1))
+                     for t, valid in zip(triangles, real)])
+
+
 def simplify(model, library, ratio=0.3, error=0.005):
     lib = C.CDLL(str(library))
     f = lib.meshopt_simplifyWithAttributes
@@ -123,21 +146,47 @@ def simplify(model, library, ratio=0.3, error=0.005):
         if p['shape'] == 0:
             outputs.append(p['raw']); continue
         pos, attr, bones = model.decode(p)
-        indices = p['triangles'].ravel().copy(); dest = np.empty_like(indices)
-        lock = np.zeros(len(pos), dtype=np.uint8)
-        for tri in p['triangles']:
-            if len(set(bones[tri])) > 1: lock[tri] = 1
-        # meshoptimizer requires consistent locks for coincident vertices.
-        locked = {tuple(pos[i]) for i in np.flatnonzero(lock)}
-        for i, value in enumerate(pos):
-            if tuple(value) in locked: lock[i] = 1
+        triangles = p['triangles']
+        assignments = bones[triangles]
+        protected = protected_faces(p, bones)
+        preserved = triangles[protected]
+        # Strip connector triangles contain repeated complete records and cannot
+        # contribute visible area, even after skinning.
+        eligible = (~protected) & np.array([len(set(t)) == 3 for t in triangles])
+        # Coordinates belong to each vertex's draw matrix. Comparing positions
+        # across matrices can weld unrelated vertices or discard faces that only
+        # acquire area after skinning. Keep every crossing face verbatim, even
+        # when its raw local-space area is zero, and simplify each matrix alone.
+        pieces = [preserved.ravel()]
+        locked_vertices = set(int(i) for i in preserved.ravel())
+        max_error = 0.0
         weights = np.full(attr.shape[1], 0.1, dtype=np.float32)
-        achieved = C.c_float()
-        count = f(dest.ctypes.data, indices.ctypes.data, len(indices), pos.ctypes.data, len(pos), 12,
-            attr.ctypes.data, attr.strides[0], weights.ctypes.data, attr.shape[1], lock.ctypes.data,
-            int(len(indices)*ratio)//3*3, error, 1, C.byref(achieved))
-        assert count > 0 and count % 3 == 0 and count <= len(indices)
-        dest = dest[:count]
+        for bone in np.unique(assignments[eligible, 0]):
+            group = triangles[eligible & (assignments[:, 0] == bone)]
+            used, inverse = np.unique(group, return_inverse=True)
+            indices = inverse.ravel().astype(np.uint32)
+            group_pos = np.ascontiguousarray(pos[used])
+            group_attr = np.ascontiguousarray(attr[used])
+            lock = np.array([int(i) in locked_vertices for i in used], dtype=np.uint8)
+            # Consistent locks for coincident vertices within this matrix only.
+            locked = {tuple(group_pos[i]) for i in np.flatnonzero(lock)}
+            for i, value in enumerate(group_pos):
+                if tuple(value) in locked: lock[i] = 1
+            dest = np.empty_like(indices)
+            achieved = C.c_float()
+            count = f(dest.ctypes.data, indices.ctypes.data, len(indices), group_pos.ctypes.data, len(used), 12,
+                group_attr.ctypes.data, group_attr.strides[0], weights.ctypes.data, attr.shape[1], lock.ctypes.data,
+                int(len(indices)*ratio)//3*3, error, 1, C.byref(achieved))
+            assert count % 3 == 0 and count <= len(indices)
+            pieces.append(used[dest[:count]])
+            max_error = max(max_error, achieved.value)
+        dest = np.concatenate(pieces).astype(np.uint32)
+        count = len(dest)
+        assert count > 0
+        reorder = lib.meshopt_optimizeVertexCacheStrip
+        reorder.argtypes = [C.c_void_p, C.c_void_p, C.c_size_t, C.c_size_t]
+        reorder.restype = None
+        reorder(dest.ctypes.data, dest.ctypes.data, count, len(pos))
         # Stripify without connecting separate strips by degenerate triangles.
         strips = np.empty(lib.meshopt_stripifyBound(count), dtype=np.uint32)
         n = lib.meshopt_stripify(strips.ctypes.data, dest.ctypes.data, count, len(pos), 0xffffffff)
@@ -169,8 +218,9 @@ def simplify(model, library, ratio=0.3, error=0.005):
         else:
             outputs.append(padded(raw))
             output_count = len(decoded)
-        report.append(dict(packet=p['index'], before=len(indices)//3, after=count//3,
-            output_triangles=output_count, locked_vertices=int(lock.sum()), error=achieved.value))
+        report.append(dict(packet=p['index'], before=len(triangles), after=count//3,
+            output_triangles=output_count, preserved_detail_triangles=len(preserved),
+            locked_vertices=len(locked_vertices), error=max_error))
     s = bytearray(model.shp[:model.dl]); draws = []
     for p, raw in zip(model.packets, outputs):
         draws.append((len(raw),len(s)-model.dl)); s.extend(raw)
@@ -194,13 +244,13 @@ def validate(original, output):
         assert old['attrs'] == new['attrs'] and old['palette'] == new['palette']
         assert set(new['records']) <= set(old['records'])
         if old['shape'] == 0: assert old['raw'] == new['raw']
-        pos, _, bones = before.decode(old)
+        _, _, bones = before.decode(old)
         after.decode(new)  # Validate every retained attribute/palette reference.
-        new_triangles = {oriented([new['records'][i] for i in t]) for t in new['triangles']}
-        for tri in old['triangles']:
-            area = np.linalg.norm(np.cross(pos[tri[1]]-pos[tri[0]],pos[tri[2]]-pos[tri[0]]))
-            if len(set(bones[tri])) > 1 and area > 1e-8:
-                assert oriented([old['records'][i] for i in tri]) in new_triangles
+        new_triangles = Counter(oriented([new['records'][i] for i in t])
+                                for t in new['triangles'] if len(set(t)) == 3)
+        required = Counter(oriented([old['records'][i] for i in tri])
+                           for tri in old['triangles'][protected_faces(old, bones)])
+        assert not (required - new_triangles), 'Missing protected hair detail/transition faces'
         assert len(new['triangles']) <= len(old['triangles'])
     return before, after
 
