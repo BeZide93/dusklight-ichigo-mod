@@ -4,6 +4,7 @@
 #include "mods/svc/log.h"
 #include "service_imports.hpp"
 #include "update_service.hpp"
+#include "model_settings.hpp"
 
 // Game includes
 #include "d/d_item_data.h"
@@ -17,6 +18,7 @@ IMPORT_SERVICE(HookService, svc_hook);
 IMPORT_SERVICE(ConfigService, svc_config);
 IMPORT_SERVICE(UiService, svc_ui);
 IMPORT_SERVICE(HttpService, svc_http);
+IMPORT_SERVICE(OverlayService, svc_overlay);
 
 // Example game hook: turn heart drops into green rupees.
 DEFINE_HOOK(fopAcM_createItem, CreateItem);
@@ -39,7 +41,11 @@ MOD_EXPORT ModResult mod_initialize(ModError*) {
     }
 
     svc_log->info(mod_ctx, "Ichigo Mod initialized");
-    return ichigo::init_update_service();
+    result = ichigo::init_model_settings();
+    if (result != MOD_OK) return result;
+    result = ichigo::init_update_service();
+    if (result != MOD_OK) ichigo::shutdown_model_settings();
+    return result;
 }
 
 MOD_EXPORT ModResult mod_update(ModError*) {
@@ -49,6 +55,7 @@ MOD_EXPORT ModResult mod_update(ModError*) {
 
 MOD_EXPORT ModResult mod_shutdown(ModError*) {
     ichigo::shutdown_update_service();
+    ichigo::shutdown_model_settings();
     return MOD_OK;
 }
 }

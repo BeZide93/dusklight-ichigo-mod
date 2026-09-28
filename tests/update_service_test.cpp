@@ -7,6 +7,9 @@
 #include "../src/update_service.cpp"
 
 ModContext* mod_ctx = nullptr;
+namespace ichigo {
+ModResult build_model_settings(ModContext*, UiElementHandle) { return MOD_OK; }
+}
 namespace {
 ConfigService config{};
 HttpService http{};
