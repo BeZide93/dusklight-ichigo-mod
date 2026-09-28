@@ -99,3 +99,11 @@ Point the build at an existing checkout instead of fetching one:
 ```sh
 cmake -B build -DDUSKLIGHT_DIR=~/path/to/dusklight
 ```
+
+## Optimized hair model
+
+All four Ichigo hair variants (`al_head`, `bl_head`, `ml_head`, `zl_head`) use
+reduced geometry, including the fine-surface fix. Depending on the variant, this
+removes **30–64% of strip triangles** and **25–69% of submitted vertex records**.
+Fine hair patches, textures, rig data and each model's individual toggle are preserved.
+See [hair model details and reproduction](docs/hair-model.md).
