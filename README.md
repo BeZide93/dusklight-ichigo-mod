@@ -39,7 +39,8 @@ For the normal Kmdl appearance, `al.bmd`, `al_face.bmd`, `al_head.bmd`, and
 that load those same resources, including Dark Link.
 
 The **alSumou** section independently controls `bls.bmd`, `bls_head.bmd`, and
-`bls_hands.bmd`. Sumo keeps using the face from the loaded clothing archive;
+`bls_hands.bmd` under `Object/alSumou/archive/bmdr/`. Sumo keeps using the face
+from the loaded clothing archive;
 there is no separate sumo face replacement or face switch.
 
 The BMD files are bundled under `res/models/` and registered through Dusklight's

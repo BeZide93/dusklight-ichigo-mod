@@ -143,6 +143,7 @@ int main(int argc, char** argv) {
     unsigned sumoModels = 0;
     for (auto& model : s_models) {
         if (std::string(model.group) != "alSumou") continue;
+        assert(std::string(model.discPath).starts_with("/res/Object/alSumou/archive/bmdr/"));
         ++sumoModels;
         toggle(model.config, false);
         assert(!face_overlay_enabled("Bmdl") && face_overlay_enabled("Kmdl"));
