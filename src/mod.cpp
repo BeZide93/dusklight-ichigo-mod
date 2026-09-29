@@ -6,6 +6,7 @@
 #include "update_service.hpp"
 #include "model_settings.hpp"
 #include "eye_movement.hpp"
+#include "hair_motion.hpp"
 
 // Game includes
 #include "d/d_item_data.h"
@@ -45,6 +46,11 @@ MOD_EXPORT ModResult mod_initialize(ModError* error) {
     result = ichigo::init_model_settings();
     if (result != MOD_OK) return result;
     result = ichigo::install_eye_movement_hooks(error);
+    if (result != MOD_OK) {
+        ichigo::shutdown_model_settings();
+        return result;
+    }
+    result = ichigo::install_hair_motion_hooks(error);
     if (result != MOD_OK) {
         ichigo::shutdown_model_settings();
         return result;

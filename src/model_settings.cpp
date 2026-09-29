@@ -1,6 +1,7 @@
 #include "model_settings.hpp"
 #include "service_imports.hpp"
 #include <cstring>
+#include <string_view>
 
 namespace ichigo {
 namespace {
@@ -58,6 +59,17 @@ bool face_overlay_enabled(const char* group) {
         if (std::strcmp(model.group, group) == 0 &&
             (std::strcmp(model.label, "al_face.bmd") == 0 ||
              std::strcmp(model.label, "zl_face.bmd") == 0)) {
+            return model.overlay != 0;
+        }
+    }
+    return false;
+}
+
+bool head_overlay_enabled(const char* group) {
+    if (!group) return false;
+    for (const auto& model : s_models) {
+        if (std::strcmp(model.group, group) == 0 &&
+            std::string_view(model.label).ends_with("_head.bmd")) {
             return model.overlay != 0;
         }
     }

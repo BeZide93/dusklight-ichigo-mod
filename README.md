@@ -114,6 +114,22 @@ removes **30–64% of strip triangles** and **25–69% of submitted vertex recor
 Fine hair patches, textures, rig data and each model's individual toggle are preserved.
 See [hair model details and reproduction](docs/hair-model.md).
 
+## Hair movement
+
+Ichigo's five hair joints use gentler procedural wind/idle motion for all head
+variants, including sumo. Root-strand and sideburn rotations use **20%** of the
+native angle, capped at approximately **6 degrees per axis**. The child tip joint
+uses **10%**, capped at approximately **3 degrees**, to reduce sharp bends between
+the transferred skin weights while retaining subtle movement.
+
+This adjustment applies only when that variant's head overlay is enabled. Sumo
+uses its own `bls_head.bmd` switch, independently of the clothing archive's head
+switch. The code changes only the native hair rotation call's arguments; it does
+not modify the simulation state, BMDs, weights or textures. Body/limb rotation,
+cap/accessory joints, authored head animations, Wolf Link and status previews
+remain unchanged. Restart after changing model switches. The final appearance
+and tuning still need an in-game test.
+
 ## Eye movement
 
 Both eyes use a fixed **40% movement range** for Kmdl (Hero), Bmdl (casual),

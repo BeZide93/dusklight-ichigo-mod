@@ -114,6 +114,10 @@ int main(int argc, char** argv) {
     // Sumo reuses the loaded clothing archive's face; alSumou has no face BMD.
     assert(!face_overlay_enabled("alSumou"));
     assert(!face_overlay_enabled("Wmdl") && !face_overlay_enabled(nullptr));
+    for (const char* group : {"Kmdl", "Bmdl", "Mmdl", "Zmdl", "alSumou"}) {
+        assert(head_overlay_enabled(group));
+    }
+    assert(!head_overlay_enabled("Wmdl") && !head_overlay_enabled(nullptr));
     assert(build_model_settings(mod_ctx, 1) == MOD_OK && controls.size() == assets.size());
     for (auto& model : s_models) {
         const auto old = active;
@@ -125,9 +129,16 @@ int main(int argc, char** argv) {
                 if (std::string(group) != model.group) assert(face_overlay_enabled(group));
             }
         }
+        const bool isHead = std::string(model.label).ends_with("_head.bmd");
+        for (const char* group : {"Kmdl", "Bmdl", "Mmdl", "Zmdl", "alSumou"}) {
+            assert(head_overlay_enabled(group) == !(isHead && std::string(group) == model.group));
+        }
         for (const auto& [id, path] : active) assert(old.at(id) == path);
         toggle(model.config, true);
         assert(model.overlay && active.size() == assets.size());
+        for (const char* group : {"Kmdl", "Bmdl", "Mmdl", "Zmdl", "alSumou"}) {
+            assert(head_overlay_enabled(group));
+        }
         for (const char* group : {"Kmdl", "Bmdl", "Mmdl", "Zmdl"}) {
             assert(face_overlay_enabled(group));
         }
@@ -165,6 +176,7 @@ int main(int argc, char** argv) {
     const auto count = active.size();
     shutdown_model_settings();
     assert(active.empty() && variables.empty());
+    assert(!head_overlay_enabled("Kmdl") && !head_overlay_enabled("alSumou"));
     shutdown_model_settings();
     assert(init_model_settings() == MOD_OK && active.size() == count);
     for (const auto& model : s_models) assert((model.overlay != 0) == saved.at(model.key));
