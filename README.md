@@ -117,18 +117,24 @@ See [hair model details and reproduction](docs/hair-model.md).
 ## Hair movement
 
 Ichigo's five hair joints use gentler procedural wind/idle motion for all head
-variants, including sumo. Root-strand and sideburn rotations use **20%** of the
-native angle, capped at approximately **6 degrees per axis**. The child tip joint
-uses **10%**, capped at approximately **3 degrees**, to reduce sharp bends between
-the transferred skin weights while retaining subtle movement.
+variants, including sumo. Small strand and sideburn rotations use approximately
+**30%** of the native angle; the child tip joint uses approximately **15%**.
+A smooth saturation curve eases toward **9 degrees per axis** (tip: **4.5 degrees**)
+instead of abruptly clamping, retaining movement without sharp bends.
 
-This adjustment applies only when that variant's head overlay is enabled. Sumo
-uses its own `bls_head.bmd` switch, independently of the clothing archive's head
-switch. The code changes only the native hair rotation call's arguments; it does
-not modify the simulation state, BMDs, weights or textures. Body/limb rotation,
-cap/accessory joints, authored head animations, Wolf Link and status previews
-remain unchanged. Restart after changing model switches. The final appearance
-and tuning still need an in-game test.
+The code identifies the loaded head's geometry against the heads in this mod's
+own bundle, with native byte order taken into account. Changing a head switch
+therefore does not change damping until the model actually changes: a cached
+Ichigo head remains damped after switching Off, and a cached vanilla or different
+head remains native after switching On. Identity is rechecked on head reload,
+including reused memory addresses, and when a different model is encountered.
+No resource files are read during rendering.
+
+Only the native hair rotation call's arguments change. Simulation state, BMDs,
+weights, textures, body/limb rotation, cap/accessory joints, authored head
+animations, Wolf Link and status previews remain unchanged. Restart after
+changing model switches to ensure cached models are replaced. The final
+appearance and tuning still need an in-game test.
 
 ## Eye movement
 

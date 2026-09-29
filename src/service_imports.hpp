@@ -6,6 +6,7 @@
 #include "mods/svc/http.h"
 #include "mods/svc/log.h"
 #include "mods/svc/overlay.h"
+#include "mods/svc/resource.h"
 #include "mods/svc/ui.h"
 
 extern const ConfigService* svc_config;
@@ -14,3 +15,4 @@ extern const HttpService* svc_http;
 extern const LogService* svc_log;
 extern const UiService* svc_ui;
 extern const OverlayService* svc_overlay;
+extern const ResourceService* svc_resource;

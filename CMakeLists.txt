@@ -48,6 +48,9 @@ if(ICHIGO_BUILD_TESTS)
     add_executable(hair_motion_test tests/hair_motion_test.cpp)
     target_compile_features(hair_motion_test PRIVATE cxx_std_20)
     add_test(NAME hair_motion COMMAND hair_motion_test)
+    add_executable(hair_identity_test tests/hair_identity_test.cpp)
+    target_compile_features(hair_identity_test PRIVATE cxx_std_20)
+    add_test(NAME hair_identity COMMAND hair_identity_test "${CMAKE_CURRENT_SOURCE_DIR}")
     if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
         # Linux permits unresolved symbols in modules; service pointer definitions
         # must still be supplied by IMPORT_SERVICE rather than the game binary.
