@@ -106,11 +106,13 @@ int main(int argc, char** argv) {
         assert(registered.insert(model.bundlePath).second);
         assert(keys.insert(model.key).second);
     }
-    assert(assets == registered && assets.size() == 20);
+    assert(assets == registered && assets.size() == 23);
     assert(init_model_settings() == MOD_OK && active.size() == assets.size());
     for (const char* group : {"Kmdl", "Bmdl", "Mmdl", "Zmdl"}) {
         assert(face_overlay_enabled(group));
     }
+    // Sumo reuses the loaded clothing archive's face; alSumou has no face BMD.
+    assert(!face_overlay_enabled("alSumou"));
     assert(!face_overlay_enabled("Wmdl") && !face_overlay_enabled(nullptr));
     assert(build_model_settings(mod_ctx, 1) == MOD_OK && controls.size() == assets.size());
     for (auto& model : s_models) {
@@ -131,6 +133,25 @@ int main(int argc, char** argv) {
         }
         toggle(model.config, true); // Idempotent; no duplicated overlay.
     }
+    // Sumo body/head/hand switches must not enable a disabled shared face.
+    ModelSetting* casualFace = nullptr;
+    for (auto& model : s_models) {
+        if (std::string(model.key) == "model-bmdl-bmwr-al-face") casualFace = &model;
+    }
+    assert(casualFace);
+    toggle(casualFace->config, false);
+    unsigned sumoModels = 0;
+    for (auto& model : s_models) {
+        if (std::string(model.group) != "alSumou") continue;
+        ++sumoModels;
+        toggle(model.config, false);
+        assert(!face_overlay_enabled("Bmdl") && face_overlay_enabled("Kmdl"));
+        toggle(model.config, true);
+        assert(!face_overlay_enabled("Bmdl") && face_overlay_enabled("Kmdl"));
+    }
+    assert(sumoModels == 3);
+    toggle(casualFace->config, true);
+
     auto& first = s_models[0];
     failRemove = true; toggle(first.config, false); failRemove = false;
     assert(first.overlay && saved.at(first.key));
