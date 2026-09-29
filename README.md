@@ -22,10 +22,11 @@ cancels pending requests. Failed or incomplete downloads do not replace the mod.
 
 ## Model settings
 
-Open **Mods → Ichigo Mod → Model Overlays** to toggle each of the 20 BMD
+Open **Mods → Ichigo Mod → Model Overlays** to toggle each of the 23 BMD
 replacements independently. All switches default to **On**. Files are grouped by
-archive: **Alink** (swords and scabbards), **Bmdl**, **Kmdl**, **Mmdl**, and **Zmdl**
-(their separate body, face, head and hand models). Identical filenames in different
+archive: **Alink** (swords and scabbards), **alSumou** (sumo body, head and hands),
+**Bmdl**, **Kmdl**, **Mmdl**, and **Zmdl** (their separate body, face, head and hand
+models). Identical filenames in different
 archives have separate settings, saved in `config.json`.
 
 **Restart Dusklight after changing models.** Overlays change when files are read;
@@ -36,6 +37,11 @@ load. Model combinations can have visible seams or mismatched parts.
 For the normal Kmdl appearance, `al.bmd`, `al_face.bmd`, `al_head.bmd`, and
 `al_hands.bmd` can each be disabled separately. This also affects other actors
 that load those same resources, including Dark Link.
+
+The **alSumou** section independently controls `bls.bmd`, `bls_head.bmd`, and
+`bls_hands.bmd` under `Object/alSumou/archive/bmdr/`. Sumo keeps using the face
+from the loaded clothing archive;
+there is no separate sumo face replacement or face switch.
 
 The BMD files are bundled under `res/models/` and registered through Dusklight's
 runtime overlay service. They must not also be packaged under `overlay/`, which
@@ -110,14 +116,16 @@ See [hair model details and reproduction](docs/hair-model.md).
 
 ## Eye movement
 
-Both eyes use a fixed **40% movement range** for all four Ichigo variants:
-Kmdl (Hero), Bmdl (casual), Mmdl (Magic Armor) and Zmdl (Zora).
+Both eyes use a fixed **40% movement range** for Kmdl (Hero), Bmdl (casual),
+Mmdl (Magic Armor) and Zmdl (Zora), including the shared face during sumo.
 The code uses Dawnlight's final eye-material calculation hook, covering both
 BTK animations and procedural idle/target glances without editing AlAnm files.
 Texture scale, rotation, eyelid animation, animation timing and internal eye
 interpolation remain unchanged. Wolf Link and status-window previews are excluded.
-Disabling a variant's face overlay also disables this adjustment for that variant;
-as with other model settings, restart Dusklight after changing overlays.
+The adjustment follows the face archive actually loaded by Link, including sumo
+model changes. Disabling that archive's face overlay also disables this adjustment;
+the three sumo body/head/hand switches are independent. As with other model
+settings, restart Dusklight after changing overlays.
 
 When Dawnlight is also enabled, Ichigo's fixed 40% replaces its eye-range setting
 for these faces rather than multiplying the two percentages. Use the original

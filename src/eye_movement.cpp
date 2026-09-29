@@ -14,13 +14,6 @@ namespace {
 DEFINE_HOOK(&daAlink_matAnm_c::calc, IchigoEyeMaterialCalcHook);
 constexpr f32 kEyeMovementFactor = 0.4f;
 
-const char* current_model_group() {
-    if (daPy_py_c::checkCasualWearFlg()) return "Bmdl";
-    if (daPy_py_c::checkMagicArmorWearFlg()) return "Mmdl";
-    if (daPy_py_c::checkZoraWearFlg()) return "Zmdl";
-    return "Kmdl";
-}
-
 void after_eye_material_calc(ModContext*, void* args, void*, void*) {
     auto* animation = mods::arg<const daAlink_matAnm_c*>(args, 0);
     auto* material = mods::arg<J3DMaterial*>(args, 1);
@@ -32,7 +25,10 @@ void after_eye_material_calc(ModContext*, void* args, void*, void*) {
     if (animation != link->field_0x2180[0] && animation != link->field_0x2180[1]) {
         return;
     }
-    if (!face_overlay_enabled(current_model_group())) {
+    // changeLink loads the face from mArcName even when the body, hair and
+    // hands come from alSumou. Follow that loaded archive, not clothing flags
+    // or the sumo body toggle, so its face setting also governs the 40% range.
+    if (!face_overlay_enabled(link->mArcName)) {
         return;
     }
 
