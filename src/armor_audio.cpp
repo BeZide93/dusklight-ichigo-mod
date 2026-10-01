@@ -8,7 +8,10 @@
 namespace ichigo {
 namespace {
 
-DEFINE_HOOK(&Z2CreatureLink::startLinkSound, IchigoArmorSoundHook);
+// MSVC cannot const-initialize the SDK's member-pointer metadata for this
+// multiple-inheritance class. Resolve the same method by name instead.
+DEFINE_HOOK_SYMBOL("Z2CreatureLink::startLinkSound",
+                   Z2SoundHandlePool*(Z2CreatureLink*, JAISoundID, u32, s8), IchigoArmorSoundHook);
 
 HookAction before_link_sound(ModContext*, void* args, void* result, void*) {
     auto* linkSound = mods::arg<Z2CreatureLink*>(args, 0);
