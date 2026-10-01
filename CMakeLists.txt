@@ -4,7 +4,7 @@ if (NOT DEFINED CMAKE_BUILD_TYPE AND NOT DEFINED ENV{CMAKE_BUILD_TYPE})
     set(CMAKE_BUILD_TYPE "RelWithDebInfo" CACHE STRING "Build type")
 endif ()
 
-project(ichigo_mod VERSION 1.1.3 LANGUAGES CXX)
+project(ichigo_mod VERSION 1.1.4 LANGUAGES CXX)
 
 # The Dusklight version to build against: a release tag (e.g. "v2.0.0") or a commit SHA.
 if (NOT DUSKLIGHT_VERSION)
@@ -27,7 +27,7 @@ FetchContent_MakeAvailable(ichigo_json)
 
 add_mod(ichigo_mod
         FEATURES game          # remove for service/asset-only mods; add webgpu for GfxService
-        SOURCES src/mod.cpp src/update_service.cpp src/model_settings.cpp src/eye_movement.cpp src/hair_motion.cpp
+        SOURCES src/mod.cpp src/update_service.cpp src/model_settings.cpp src/eye_movement.cpp src/hair_motion.cpp src/armor_audio.cpp
         MOD_JSON "${CMAKE_CURRENT_BINARY_DIR}/mod.json"
         RES_DIR res            # mod resources, including icon.png and banner.png
         TEXTURES_DIR textures  # texture replacements; remove if unused
