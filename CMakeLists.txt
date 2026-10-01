@@ -27,7 +27,7 @@ FetchContent_MakeAvailable(ichigo_json)
 
 add_mod(ichigo_mod
         FEATURES game          # remove for service/asset-only mods; add webgpu for GfxService
-        SOURCES src/mod.cpp src/update_service.cpp src/model_settings.cpp src/eye_movement.cpp src/armor_audio.cpp
+        SOURCES src/mod.cpp src/update_service.cpp src/model_settings.cpp src/eye_movement.cpp src/hair_motion.cpp src/armor_audio.cpp
         MOD_JSON "${CMAKE_CURRENT_BINARY_DIR}/mod.json"
         RES_DIR res            # mod resources, including icon.png and banner.png
         TEXTURES_DIR textures  # texture replacements; remove if unused
@@ -45,6 +45,12 @@ if(ICHIGO_BUILD_TESTS)
     target_compile_features(model_settings_test PRIVATE cxx_std_20)
     target_link_libraries(model_settings_test PRIVATE dusklight_mod_api)
     add_test(NAME model_settings COMMAND model_settings_test "${CMAKE_CURRENT_SOURCE_DIR}")
+    add_executable(hair_motion_test tests/hair_motion_test.cpp)
+    target_compile_features(hair_motion_test PRIVATE cxx_std_20)
+    add_test(NAME hair_motion COMMAND hair_motion_test)
+    add_executable(hair_identity_test tests/hair_identity_test.cpp)
+    target_compile_features(hair_identity_test PRIVATE cxx_std_20)
+    add_test(NAME hair_identity COMMAND hair_identity_test "${CMAKE_CURRENT_SOURCE_DIR}")
     if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
         # Linux permits unresolved symbols in modules; service pointer definitions
         # must still be supplied by IMPORT_SERVICE rather than the game binary.

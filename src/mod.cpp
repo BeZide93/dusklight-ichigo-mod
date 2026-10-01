@@ -6,6 +6,7 @@
 #include "update_service.hpp"
 #include "model_settings.hpp"
 #include "eye_movement.hpp"
+#include "hair_motion.hpp"
 #include "armor_audio.hpp"
 
 // Game includes
@@ -21,6 +22,7 @@ IMPORT_SERVICE(ConfigService, svc_config);
 IMPORT_SERVICE(UiService, svc_ui);
 IMPORT_SERVICE(HttpService, svc_http);
 IMPORT_SERVICE(OverlayService, svc_overlay);
+IMPORT_SERVICE(ResourceService, svc_resource);
 
 // Example game hook: turn heart drops into green rupees.
 DEFINE_HOOK(fopAcM_createItem, CreateItem);
@@ -55,6 +57,11 @@ MOD_EXPORT ModResult mod_initialize(ModError* error) {
         ichigo::shutdown_model_settings();
         return result;
     }
+    result = ichigo::install_hair_motion_hooks(error);
+    if (result != MOD_OK) {
+        ichigo::shutdown_model_settings();
+        return result;
+    }
     result = ichigo::init_update_service();
     if (result != MOD_OK) ichigo::shutdown_model_settings();
     return result;
@@ -67,6 +74,7 @@ MOD_EXPORT ModResult mod_update(ModError*) {
 
 MOD_EXPORT ModResult mod_shutdown(ModError*) {
     ichigo::shutdown_update_service();
+    ichigo::shutdown_hair_motion();
     ichigo::shutdown_model_settings();
     return MOD_OK;
 }
