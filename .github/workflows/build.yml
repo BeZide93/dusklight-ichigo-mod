@@ -96,6 +96,10 @@ jobs:
         if: matrix.platform == 'linux-x86_64'
         run: python3 tests/hair_model_test.py
 
+      - name: Test Magic Armor movement sounds
+        if: matrix.platform == 'linux-x86_64'
+        run: python3 tests/armor_audio_test.py
+
       - name: Upload artifact
         uses: actions/upload-artifact@v7
         with:

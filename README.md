@@ -48,6 +48,14 @@ runtime overlay service. They must not also be packaged under `overlay/`, which
 would keep disabled replacements active. `src/model_overlays.inc` lists every
 file and its stable setting key; the model settings test checks asset coverage.
 
+## Magic Armor movement sounds
+
+While Ichigo Mod is enabled, Magic Armor uses the normal movement sounds shared
+with Hero's Tunic, without its additional light/heavy armor rattle. This applies
+both with and without rupees. Footsteps still follow the ground surface, and
+Iron Boots, equipment sounds and the armor's power-up/power-down cues keep their
+normal behavior. Armor protection, weight and rupee consumption are unchanged.
+
 ## Quick start
 
 1. Click "Use this template" to create a new repository for your mod.
