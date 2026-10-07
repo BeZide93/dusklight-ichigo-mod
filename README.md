@@ -11,37 +11,27 @@ Individual replacements can be configured under Mods → Ichigo Mod → Model Ov
 
 Other mods replacing the same assets may conflict. Mixing Ichigo and vanilla model parts may cause visible seams.
 
-Credits & Asset Sources
+**Credits & Asset Sources**
 
-Mod adaptation
+**Mod adaptation**
+- **BeZide93 / BeZide** — Model assembly, adaptation and rigging adjustments for Twilight Princess, optimization, animation tuning and Dusklight integration.
 
-    BeZide93 / BeZide — Model assembly, adaptation and rigging adjustments for Twilight Princess, optimization, animation tuning and Dusklight integration.
+**Sketchfab model sources**
+- **Marianozi** (`white_guy_official23`) — [Ichigo Kurosaki (Sinegami)](https://sketchfab.com/3d-models/ichigo-kurosaki-sinegami-395fe371606e4742b3ec5fe74641a5bc). Listed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+- **Cyrone™** — [Ichigo Kurosaki](https://sketchfab.com/3d-models/ichigo-kurosaki-4d874ca9990d4ea6a48cfe85f60a3f6d), sourced from **Bleach: Paradise Lost**. Listed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+- **Karosio** — [Zangetsu (Ichigo Kurosaki’s Zanpakuto)](https://sketchfab.com/3d-models/zangetsu-ichigo-kurosakis-zanpakuto-9a01e07404cb42049853e0fd8dcf65a9), modeled in Blender and textured in Substance Painter. Licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
-Sketchfab model sources
+These source assets have been modified and converted for use in Twilight Princess through Dusklight. The adapted Zangetsu asset and BeZide’s modifications to it are distributed under **CC BY-NC-SA 4.0**. This asset-specific license statement does not relicense unrelated mod code or other assets.
 
-    Marianozi (white_guy_official23) — Ichigo Kurosaki (Sinegami). Listed under CC BY 4.0.
+**Original game assets and rights holders**
+- **LINE Corporation / YD Online** — Original game assets from **LINE BLEACH – Paradise Lost**.
+- **Spike Chunsoft / Bandai Namco Entertainment** — Original game assets from **Jump Force**.
+- **Tite Kubo / SHUEISHA** — Bleach and its original characters.
+- **TV TOKYO, dentsu and Pierrot** — Bleach anime rights holders.
+- **Nintendo** — The Legend of Zelda: Twilight Princess and its original game assets.
 
-    Cyrone™ — Ichigo Kurosaki, sourced from Bleach: Paradise Lost. Listed under CC BY 4.0.
-
-    Karosio — Zangetsu (Ichigo Kurosaki’s Zanpakuto), modeled in Blender and textured in Substance Painter. Licensed under CC BY-NC-SA 4.0.
-
-These source assets have been modified and converted for use in Twilight Princess through Dusklight. The adapted Zangetsu asset and BeZide’s modifications to it are distributed under CC BY-NC-SA 4.0. This asset-specific license statement does not relicense unrelated mod code or other assets.
-
-Original game assets and rights holders
-
-    LINE Corporation / YD Online — Original game assets from LINE BLEACH – Paradise Lost.
-
-    Spike Chunsoft / Bandai Namco Entertainment — Original game assets from Jump Force.
-
-    Tite Kubo / SHUEISHA — Bleach and its original characters.
-
-    TV TOKYO, dentsu and Pierrot — Bleach anime rights holders.
-
-    Nintendo — The Legend of Zelda: Twilight Princess and its original game assets.
-
-Special thanks
-
-    TwilitRealm and the Dusklight contributors — Dusklight and its modding framework.
+**Special thanks**
+- **TwilitRealm and the Dusklight contributors** — Dusklight and its modding framework.
 
 This is an unofficial, non-commercial fan modification, distributed free of charge. Credit for original assets remains with their respective creators and rights holders. Sketchfab contributor credits acknowledge the linked sources and do not imply ownership of the underlying commercial game assets. No endorsement by the original creators, publishers or rights holders is implied.
 
