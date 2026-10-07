@@ -92,7 +92,7 @@ jobs:
         if: matrix.platform == 'linux-x86_64'
         run: ctest --test-dir build --output-on-failure
 
-      - name: Validate simplified hair model
+      - name: Validate optimized hair models
         if: matrix.platform == 'linux-x86_64'
         run: python3 tests/hair_model_test.py
 
