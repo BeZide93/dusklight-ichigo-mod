@@ -1,13 +1,21 @@
-# Ichigo Kurosaki — Bleach × Twilight Princess
-Bring a Soul Reaper to Hyrule! This mod replaces Link with Ichigo Kurosaki from Bleach, adapted for Dusklight using model parts and assets from LINE BLEACH – Paradise Lost and Jump Force.
+**Ichigo Kurosaki — Bleach × Twilight Princess**
+
+Bring a Soul Reaper to Hyrule! This mod replaces Link with Ichigo Kurosaki from Bleach, adapted for Dusklight using model parts and assets from **LINE BLEACH – Paradise Lost** and **Jump Force**.
 
 The mod includes replacements for Link’s Hero’s Tunic, Ordon clothing, Magic Armor, Zora Armor and sumo appearances, alongside matching body parts and replacement sword and scabbard models.
 
-Installation
+**Features**
 
-Place ichigo_mod.dusk in Dusklight’s mods folder and enable Ichigo Mod in the mod manager.
+- Individually configurable model replacements, enabled by default.
+- Optimized hair geometry with gentler, smoothly limited hair movement.
+- Reduced eye movement, adjusted to suit Ichigo’s face.
+- Normal movement sounds for the Magic Armor appearance, without the additional armor rattle.
 
-Individual replacements can be configured under Mods → Ichigo Mod → Model Overlays. Restart Dusklight after changing these settings.
+**Installation**
+
+Place `ichigo_mod.dusk` in Dusklight’s mods folder and enable **Ichigo Mod** in the mod manager.
+
+Individual replacements can be configured under **Mods → Ichigo Mod → Model Overlays**. Restart Dusklight after changing these settings.
 
 Other mods replacing the same assets may conflict. Mixing Ichigo and vanilla model parts may cause visible seams.
 
