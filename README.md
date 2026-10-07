@@ -43,7 +43,7 @@ These source assets have been modified and converted for use in Twilight Princes
 
 This is an unofficial, non-commercial fan modification, distributed free of charge. Credit for original assets remains with their respective creators and rights holders. Sketchfab contributor credits acknowledge the linked sources and do not imply ownership of the underlying commercial game assets. No endorsement by the original creators, publishers or rights holders is implied.
 
-
+Parts of the code and documentation were created or modified with LLM assistance and may contain mistakes despite review and testing.
 
 ## Optional update checker
 
