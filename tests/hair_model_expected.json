@@ -1,159 +1,179 @@
 {
-  "Object/Kmdl/archive/bmwr/al_head.bmd": {
-    "file_sha256": "4a75d87b04c809e3823fecd22c170de2485fd3d251b4267a6fde3cfff42aee3d",
-    "triangles": 27169,
-    "packets": 7,
-    "shapes": 2,
-    "unchanged_sections": {
-      "INF1": "b644610da5053425be763a231e349e7e129160ae26410cec19a3529b1170c249",
-      "VTX1": "0da0a1d46c8afca8374c1a2e67a8808168bb8565fa02a1cd77aabae5583ee960",
-      "EVP1": "8ad95a45afcb4127fa9f8111ce2ad1199b5027ac60f19381203d3dec6fd3be16",
-      "DRW1": "9beb9b00902cc1ba53540db4a8a4f00641604b7ae04c66d9700c7d17afffca36",
-      "JNT1": "92897490c8d4b00483b2cf8e3a619b91228357c52cf8cd2f0b94360c120c6c41",
-      "MAT3": "a12976a920a922ca589e5db336378fea08ba91e91be8bc8fa1a8def10366fc91",
-      "TEX1": "7868c27cb0ff139d5b791adb4a6c8d7da1b64b17c1635458fbfd3239f1ff517e"
-    },
-    "skinning_transitions": [
-      {
-        "triangles": 0,
-        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-      },
-      {
-        "triangles": 1006,
-        "sha256": "8b711f2422fd56dedf2ea2d5410a7361e393b99adaca4770d4b055b0ebef541b"
-      },
-      {
-        "triangles": 441,
-        "sha256": "3b4b852c4fdef6ab4323a380cd1e556b185e9d6c81e2a04b6580d576c3660636"
-      },
-      {
-        "triangles": 772,
-        "sha256": "16d0d2a94d71c78e7f510a0bb0a4c7b992df74e25cb7ee06d47b64da4a1cea0d"
-      },
-      {
-        "triangles": 89,
-        "sha256": "d31caf775fd8baf985990ca599a5b47ac2b1451f660e4b92b961d8b1bc7a76ec"
-      },
-      {
-        "triangles": 163,
-        "sha256": "9b36936e48aee4d905c4797a0d09cc3e325d795754666af07ebf6039a3323c7e"
-      },
-      {
-        "triangles": 77,
-        "sha256": "9a8b8d7d94488d8e155161014a623b74b41d7283461046e1265264b78b12f3d1"
-      }
-    ],
-    "vertices": 37589,
-    "unchanged_topology": {
-      "0": {
-        "triangles": 38,
-        "sha256": "8517a1e20e670f8a1ee4083b8c792240f69e4c435f1de39d23507abaeacd16dd"
-      },
-      "4": {
-        "triangles": 1015,
-        "sha256": "29ba298d9f51880344e2045274667273e418d5f45480daa9f05531b228f4f14d"
-      },
-      "5": {
-        "triangles": 2470,
-        "sha256": "6c861c040038a1c8de98e762b409703556b5c946858ccbe0db79c73c899356f1"
-      },
-      "6": {
-        "triangles": 861,
-        "sha256": "9d09644a9bce1d1f66b468eaf2e8d8e31e4ff07230c6c2d4c2bfdbbf0a269165"
-      }
-    }
-  },
   "Object/Bmdl/archive/bmwr/bl_head.bmd": {
-    "file_sha256": "30493cf345a7087113c92c69ab957eecf52614d27cb421bafe6ae9cba23fb5e0",
-    "triangles": 27050,
-    "vertices": 39014,
-    "packets": 8,
+    "file_sha256": "a2eaa14afc8ae25e00cb47b8a184e1d26a24346c75eeb5a1d15d48d9f05f9b45",
+    "triangles": 28432,
+    "packets": 2,
+    "declared_packets": 2,
     "shapes": 1,
+    "vertices": 32942,
     "unchanged_sections": {
-      "INF1": "4cce19328c2898ccef1a9fa2e47065419e2ffc5a2b1cacfd8d082dfeffbc8d14",
-      "VTX1": "168bde56acd41dc5e8114cd4a6806059eddf7cce7c106649da8dc5454aa51411",
       "EVP1": "996e3551cbe17589d270e036ac9520c2f1d6f30a14ca4e3d6da3d0c6aa1db0d6",
       "DRW1": "9beb9b00902cc1ba53540db4a8a4f00641604b7ae04c66d9700c7d17afffca36",
       "JNT1": "663dc8b81aa08e36ae3e8176ca3dfbeab3144388796805ea594105d1606d1cd0",
       "MAT3": "9b74979566243452aaaf98ab282d0d0f44cfc5dea551df054f161a88bff4ee24",
       "TEX1": "ccaaa80a426fc64fefcf883ff8a02e9296ef975f9b33a029d98797cf120705af"
     },
-    "skinning_transitions": [
+    "hierarchy_sha256": "cfe8d868e0263a7219fb0aba0e5c6ec8053464e37c9b8949e840993751bf0d7f",
+    "vertex_formats": [
+      [
+        9,
+        1,
+        3,
+        7
+      ],
+      [
+        10,
+        0,
+        3,
+        14
+      ],
+      [
+        13,
+        1,
+        3,
+        8
+      ],
+      [
+        14,
+        1,
+        3,
+        8
+      ]
+    ],
+    "shape_faces": [
       {
-        "triangles": 499,
-        "sha256": "dc3c613378cf79b84117cf7b2131ea9d947caec024aa8b62fa761d3dc27081cf"
-      },
-      {
-        "triangles": 1060,
-        "sha256": "f67b86b134d4ab177fedcd36b1c844136b86234d7646a714dadffa59ab9379b0"
-      },
-      {
-        "triangles": 481,
-        "sha256": "4b5cda49e8456f664ed5a74c5d76a8245799a69e38345106bf4441480d04743c"
-      },
-      {
-        "triangles": 363,
-        "sha256": "266d281d6ea4534a5f7aa2bc9dc4c33a319d4f3ebe1aaebf0bd6f4aeae4cee44"
-      },
-      {
-        "triangles": 14,
-        "sha256": "1e8b77fbf6c6fc2da875bddcd83505ad6ddd90a6e2d0bc02f4561792ace2ffd9"
-      },
-      {
-        "triangles": 68,
-        "sha256": "dfedefbe9476621896bc18ebc8ea240608794698e0489e4ffca4b67fe4424a0d"
-      },
-      {
-        "triangles": 31,
-        "sha256": "49fd1403259ac072299305a77bc1b8b111f32ef063371813acae74bc572aacd1"
-      },
-      {
-        "triangles": 32,
-        "sha256": "971a0eae4f12b672770c8c43ffded504b38b986435b4fb888f4bc14e280e5706"
+        "triangles": 23198,
+        "sha256": "1373cb389ab04705a4e3dfb9ec2302bc0bc4cb7c390c92c7049e03961a4e5a38"
       }
     ],
-    "unchanged_topology": {
-      "3": {
-        "triangles": 4306,
-        "sha256": "eaa11ad7914d32d6ba0a37ccd09571e5c846f026471bb3de6dbe788727b1bcb0"
-      },
-      "4": {
-        "triangles": 233,
-        "sha256": "58578ef35bad60bfb5c06beb86405414cb82b61963ee1e5c2392398e2962bb94"
-      },
-      "5": {
-        "triangles": 1143,
-        "sha256": "420a650b9d5fae11f067ed9298bd90d8850a4015d9fff14976369697e675ddc4"
-      },
-      "6": {
-        "triangles": 433,
-        "sha256": "a360f3f0001722da7be635d11985dba116f91f907637f3a2f4cf1015d704fb55"
-      },
-      "7": {
-        "triangles": 457,
-        "sha256": "8da16c022305088c2905e92bf111f5d280133baf482c10141b64ec2bcf96b9ca"
+    "skinning_transitions": [
+      {
+        "triangles": 2548,
+        "sha256": "ce1db2639961b7663e0631f6e41305fa077fbee46b6877cfbbc22bbb0c7181d0"
       }
-    }
+    ]
+  },
+  "Object/Kmdl/archive/bmwr/al_head.bmd": {
+    "file_sha256": "26b559418fb15fe9576c28dab617ad602c3990ad3129fb172356ac8e1e5d04e6",
+    "triangles": 28040,
+    "packets": 3,
+    "declared_packets": 3,
+    "shapes": 2,
+    "vertices": 32400,
+    "unchanged_sections": {
+      "EVP1": "8ad95a45afcb4127fa9f8111ce2ad1199b5027ac60f19381203d3dec6fd3be16",
+      "DRW1": "9beb9b00902cc1ba53540db4a8a4f00641604b7ae04c66d9700c7d17afffca36",
+      "JNT1": "92897490c8d4b00483b2cf8e3a619b91228357c52cf8cd2f0b94360c120c6c41",
+      "MAT3": "a12976a920a922ca589e5db336378fea08ba91e91be8bc8fa1a8def10366fc91",
+      "TEX1": "7868c27cb0ff139d5b791adb4a6c8d7da1b64b17c1635458fbfd3239f1ff517e"
+    },
+    "hierarchy_sha256": "4918ac5e7f056342a7f4b2f00088e6f4d83422d53573a893db42a5229084c902",
+    "vertex_formats": [
+      [
+        9,
+        1,
+        3,
+        7
+      ],
+      [
+        10,
+        0,
+        3,
+        14
+      ],
+      [
+        13,
+        1,
+        3,
+        8
+      ],
+      [
+        14,
+        1,
+        3,
+        8
+      ]
+    ],
+    "shape_faces": [
+      {
+        "triangles": 38,
+        "sha256": "38d1ee2fc3a4eeab74c5fcf6fc6e8e387d7975f5328103b7500786ecb8216fd1"
+      },
+      {
+        "triangles": 22656,
+        "sha256": "24de8431cce23c806cc89a034c29c01fc1aae1b00179e7344c89dda19ed194e9"
+      }
+    ],
+    "skinning_transitions": [
+      {
+        "triangles": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "triangles": 2548,
+        "sha256": "91ec32ff678f41c6e991ac0e76b0cc97ad2877382baea36e06c01c2c5897424f"
+      }
+    ]
   },
   "Object/Mmdl/archive/bmwr/ml_head.bmd": {
-    "file_sha256": "2798b95f9041a0468f5e1ac16b9a0a6fd91c327e1386e1f08cfa1c74b5a285f9",
-    "triangles": 13828,
-    "vertices": 16386,
+    "file_sha256": "add229ad91db294d6552a1a7e0411f5da7c028b1af2ba89fd85fb4c2dc98661f",
+    "triangles": 13825,
     "packets": 3,
+    "declared_packets": 3,
     "shapes": 3,
+    "vertices": 16305,
     "unchanged_sections": {
-      "INF1": "936f3850b727bca5f1347068222c677f50cc7a3231220b9881c1458a05b1f840",
-      "VTX1": "a90a5e3a5a1c922c452aba57324721f2afff9208d5303050ed8cac34e24e9425",
       "EVP1": "1e1a2226766eb3b88d5afe048bfbb35cfca2e8cd1c55c95e50c208ed7b6a616d",
       "DRW1": "707612032e9a6be20c192c214726d5a1c02d24530b8dc4e4b16690a7c792e619",
       "JNT1": "267a3844cf1253bdc9dcf863378f9142ac3d3b5fe4a4482f46af76eeceee921b",
       "MAT3": "3cf344262711c85c9338a48773fd24d2e38595cc7ab5d903bc993f628466490c",
       "TEX1": "409b4cedae631ed549e8847924410bfcdcfa176cc9a6fe50261c587b9a46ea85"
     },
+    "hierarchy_sha256": "111fdef4a4249332f488fc17136667b55bfc1fc108074534af2fafa55bf09e68",
+    "vertex_formats": [
+      [
+        9,
+        1,
+        3,
+        7
+      ],
+      [
+        10,
+        0,
+        3,
+        14
+      ],
+      [
+        13,
+        1,
+        3,
+        8
+      ],
+      [
+        14,
+        1,
+        3,
+        8
+      ]
+    ],
+    "shape_faces": [
+      {
+        "triangles": 11103,
+        "sha256": "ea8dffd171f6a52cf79cefe76a9448f12448f35fa4f0ead7742ba08a5435f69c"
+      },
+      {
+        "triangles": 37,
+        "sha256": "d40e068617b395d4d15f4d34c55372bba0887a5ccc764806998f747daec1b767"
+      },
+      {
+        "triangles": 1,
+        "sha256": "8016f3961e3353c6fbdd6d42a5cadeb6dbaa4b95b5ec35acbf101b289b2cb7fb"
+      }
+    ],
     "skinning_transitions": [
       {
         "triangles": 1525,
-        "sha256": "54122017799dad994f9cd618ea4f5ae63d3d001b40bb955b7497547d2ba1a051"
+        "sha256": "3539f7e29fa73cf2da1c6701a6cbee30d7b05b1452fe2fbcd32903a7c6e8eebd"
       },
       {
         "triangles": 0,
@@ -163,80 +183,116 @@
         "triangles": 0,
         "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
       }
-    ],
-    "unchanged_topology": {
-      "1": {
-        "triangles": 37,
-        "sha256": "cd1c1ecf4ea1add2ee3994849cd655da4c031af6885090ee199ec8d8bf8b89fb"
-      },
-      "2": {
-        "triangles": 1,
-        "sha256": "91c8cd1e4ec7725bba5aa47ffebed15517e0d896d49c03a1ada85bcdc63d586d"
-      }
-    }
+    ]
   },
   "Object/Zmdl/archive/bmwr/zl_head.bmd": {
-    "file_sha256": "99e6265b777c327e3128be75c505a989df2e381561e55ca20b43fdb2c09aad1e",
-    "triangles": 27169,
-    "vertices": 37589,
-    "packets": 7,
+    "file_sha256": "bd3b7aefc747c400a297bbf572183985b7f0fd86f2c0d827e313db04ff5be999",
+    "triangles": 28040,
+    "packets": 3,
+    "declared_packets": 3,
     "shapes": 2,
+    "vertices": 32400,
     "unchanged_sections": {
-      "INF1": "27b5a4c8b9f14c9e1d0cf4a33070f42a951c3c5a2fb26c1bba7ab4d501d3f2bf",
-      "VTX1": "111a122780f388859f70e6696640553c5dbe007e715d57a6e1b078cc2938fd81",
       "EVP1": "8ad95a45afcb4127fa9f8111ce2ad1199b5027ac60f19381203d3dec6fd3be16",
       "DRW1": "9beb9b00902cc1ba53540db4a8a4f00641604b7ae04c66d9700c7d17afffca36",
       "JNT1": "d00323e2e87445dbc0a8dcc9d1e5ce5f7e31bebee35ee2ef29239deb4a870291",
       "MAT3": "f49583da7f85ccc8a0e0938bd99526646e0f20fcedfc585f1f4227c63b85fa9c",
       "TEX1": "c3553e37fe5b966cad438550527eaaa77a7efc42c513bbe237b8327a0822228b"
     },
+    "hierarchy_sha256": "8a99335688b2eaf43197ebd4c2da80979b04d48a6845687ff6124a97792c69f8",
+    "vertex_formats": [
+      [
+        9,
+        1,
+        3,
+        7
+      ],
+      [
+        10,
+        0,
+        3,
+        14
+      ],
+      [
+        13,
+        1,
+        3,
+        8
+      ],
+      [
+        14,
+        1,
+        3,
+        8
+      ]
+    ],
+    "shape_faces": [
+      {
+        "triangles": 22656,
+        "sha256": "24de8431cce23c806cc89a034c29c01fc1aae1b00179e7344c89dda19ed194e9"
+      },
+      {
+        "triangles": 38,
+        "sha256": "38d1ee2fc3a4eeab74c5fcf6fc6e8e387d7975f5328103b7500786ecb8216fd1"
+      }
+    ],
     "skinning_transitions": [
       {
-        "triangles": 1006,
-        "sha256": "c158dbd38f5c5e39974295e396d8e7a90ec29a8b66b298ee696abe670ae0666a"
-      },
-      {
-        "triangles": 441,
-        "sha256": "ed4d2d6b20af1b8852cb5f6a9ec8a334d6821ac2af3d6d3ef597e5d9ba6d44bb"
-      },
-      {
-        "triangles": 772,
-        "sha256": "5fd1b3807c8d4f16e9a4f378e8da11d9676041c24e2959a0cb5e614edd5a8ceb"
-      },
-      {
-        "triangles": 89,
-        "sha256": "8972660889dbf7b3661b9437316add9a86ce2bfeb63b564a8ca99a982e3ab942"
-      },
-      {
-        "triangles": 163,
-        "sha256": "8d6ab89ff8c66c47f52f2c8ec5dd722e8ef526eedd57f399748375605c527638"
-      },
-      {
-        "triangles": 77,
-        "sha256": "5169cc087028854c6b957fb2eb44ea7d033c654a3b1fb2513940ec0b8b9532dd"
+        "triangles": 2548,
+        "sha256": "91ec32ff678f41c6e991ac0e76b0cc97ad2877382baea36e06c01c2c5897424f"
       },
       {
         "triangles": 0,
         "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
       }
+    ]
+  },
+  "Object/alSumou/archive/bmdr/bls_head.bmd": {
+    "file_sha256": "aa9f8974f1f8a295f2a03c8e790f59a4299aecb9642c609692a1c1784539048f",
+    "triangles": 38043,
+    "packets": 2,
+    "declared_packets": 2,
+    "shapes": 1,
+    "vertices": 43767,
+    "unchanged_sections": {
+      "EVP1": "996e3551cbe17589d270e036ac9520c2f1d6f30a14ca4e3d6da3d0c6aa1db0d6",
+      "DRW1": "9beb9b00902cc1ba53540db4a8a4f00641604b7ae04c66d9700c7d17afffca36",
+      "JNT1": "663dc8b81aa08e36ae3e8176ca3dfbeab3144388796805ea594105d1606d1cd0",
+      "MAT3": "9b74979566243452aaaf98ab282d0d0f44cfc5dea551df054f161a88bff4ee24",
+      "TEX1": "ccaaa80a426fc64fefcf883ff8a02e9296ef975f9b33a029d98797cf120705af"
+    },
+    "hierarchy_sha256": "cfe8d868e0263a7219fb0aba0e5c6ec8053464e37c9b8949e840993751bf0d7f",
+    "vertex_formats": [
+      [
+        9,
+        1,
+        3,
+        7
+      ],
+      [
+        10,
+        0,
+        3,
+        14
+      ],
+      [
+        13,
+        1,
+        3,
+        8
+      ]
     ],
-    "unchanged_topology": {
-      "3": {
-        "triangles": 1015,
-        "sha256": "dbc1b7ef75a7f1a5ebb0f782e898c041c62f22462e79f312b0d65fa4332126f8"
-      },
-      "4": {
-        "triangles": 2470,
-        "sha256": "3499543232dba58a550d9796569bfeff9d241a1900c02a95829a87c5fce2f0a0"
-      },
-      "5": {
-        "triangles": 861,
-        "sha256": "557dbc5b3f7c51e377f54b89247636f9361142cbcc98d07c5b3125d5132cf17d"
-      },
-      "6": {
-        "triangles": 38,
-        "sha256": "72c3e7aaff645e53e519c3689dd4cfe638a0bf9e86c6de16c57b10f1fcae350c"
+    "shape_faces": [
+      {
+        "triangles": 32382,
+        "sha256": "795de76a774bc0e35eb8929ce4278988f92ba3735fd5fff73782aa8d876a5133"
       }
-    }
+    ],
+    "skinning_transitions": [
+      {
+        "triangles": 2548,
+        "sha256": "02b13faa80248ac09adfbe17ead8a89dd3a3eebaa78b4585fa176491de55aa78"
+      }
+    ]
   }
 }
